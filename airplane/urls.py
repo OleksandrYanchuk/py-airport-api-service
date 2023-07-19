@@ -5,8 +5,6 @@ from airplane.views import AirplaneTypeViewSet, AirplaneViewSet
 
 router = routers.DefaultRouter()
 router.register("airplane_type", AirplaneTypeViewSet)
-
-
 router.register("airplanes", AirplaneViewSet)
 
 urlpatterns = [
