@@ -7,8 +7,8 @@ from route_service.models import Route
 
 
 class Crew(models.Model):
-    first_name = models.CharField(max_length=255, unique=True)
-    last_name = models.CharField(max_length=255, unique=True)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -16,15 +16,15 @@ class Crew(models.Model):
 
 class Flight(models.Model):
     route = models.ManyToManyField(Route)
-    airplane = models.ManyToManyField(Airplane)
+    airplane = models.ForeignKey(Airplane, on_delete=models.CASCADE)
     departure_time = models.DateTimeField()
     arrival_time = models.DateTimeField()
 
-    class Meta:
-        ordering = ["route"]
-
     def __str__(self):
-        return self.route
+        source_airport = self.route.source
+        destination_airport = self.route.destination
+
+        return f"{source_airport.name} to {destination_airport.name} ({self.departure_time} - {self.arrival_time})"
 
 
 class Order(models.Model):
