@@ -3,6 +3,7 @@ from rest_framework import routers
 
 from route_service.views import AirportViewSet, RouteViewSet
 
+
 router = routers.DefaultRouter()
 router.register("airports", AirportViewSet)
 router.register("routes", RouteViewSet)
