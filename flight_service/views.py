@@ -24,7 +24,7 @@ class CrewViewSet(viewsets.ModelViewSet):
 class FlightViewSet(viewsets.ModelViewSet):
     queryset = (
         Flight.objects.all()
-        .select_related("route", "airplane")
+        .select_related("airplane")
         .annotate(
             tickets_available=(
                 F("airplane__rows") * F("airplane__seats_in_row")
@@ -46,7 +46,7 @@ class FlightViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(departure_time__date=date)
 
         if route_id_str:
-            queryset = queryset.filter(movie_id=int(route_id_str))
+            queryset = queryset.filter(route__source_id=int(route_id_str))
 
         return queryset
 

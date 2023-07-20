@@ -19,6 +19,7 @@ class Flight(models.Model):
     airplane = models.ForeignKey(Airplane, on_delete=models.CASCADE)
     departure_time = models.DateTimeField()
     arrival_time = models.DateTimeField()
+    crew = models.ManyToManyField(Crew, blank=True, null=True)
 
     def __str__(self):
         source_airport = self.route.source
