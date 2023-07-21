@@ -1,22 +1,76 @@
-# (Hard) Airport API Service:
-## Ground is good, but sky is better. If you choose this one you gonna implement system for tracking flights from airports across the whole globe. Diagram is simplified for you to be able to complete the project in time. But make sure to add some additional logic (like countries, cities) if you really want to dive deeper here.
+# Airport API Service
+## Online management system for airport service
 
-DB Structure: DB Structure
-In this task, you will implement your second Portfolio Project. This project is a customization of the project you were implementing during the whole Django REST Framework module.
+## Setup and Local Installation
 
-Take this task seriously, because this project will be attached to your CV as the 2nd project.
+### To set up and run the project locally, follow these steps:
 
-# Task:
-## 1. Choose 1 and only 1 project from the options, given to you in the Theory tab of this topic. Be sure, that the option is interesting for you.
+#### 1.  Clone the repository:
 
-## 2. Create your own public repo on your GitHub account. Name it corresponding to your selected project. Important switch to the develop branch for implementing the project functionality. You will have to create a PR from the develop to the main branch and attach it as a solution to this task.
+```python
+git clone https://github.com/OleksandrYanchuk/py-airport-api-service.git
+```
+#### 2. Open the folder:
+```python
+cd py-airport-api-service
+```
+#### 3. Create a virtual environment:
+```python
+python -m venv venv
+```
+#### 4. Activate the virtual environment:
+   
+##### - For Windows:
+```python
+venv\Scripts\activate
+```
+##### -	For macOS and Linux:
+```python
+source venv/bin/activate
+```
+#### 5. Setting up Environment Variables:
 
-## 3. Implement the project, using the Cinema Shop project as an example, of what should be done. Important Make sure to name your commits properly - we will check the namings of your commits. And after each change to your project (creating a new endpoint, implementing new models, etc..) - please, make a commit with the proper name.
+##### 1. Rename a file name `.env_sample` to `.env` in the project root directory.
 
-## 4. Think about adding some additional custom logic for your project.
+##### 2. Make sure to replace all enviroment keys with your actual enviroment data.
 
-## 5. Create Pull Request from the develop branch to the main branch of your own repo.
+#### 6. For run application manually make next steps:
 
-## 6. Explain features of your API in README.md. Attach screenshots of different pages of your Browsable API. If you've added new functionality or implemented something optional - write a short description in the PR, of what you've done. If you've added new models or changed DB-structure - it is obligatory to add the DB-structure diagram (create it using draw.io).
+```python
+pip install -r requirements.txt
+```
+```python
+python manage.py migrate
+```
+#### 7. Install all fixture with data:
+```python
+python airports.py
+```
+```python
+python manage.py loaddata data.json
+```
+#### 8.Run server:
+```python
+python manage.py runserver
+```
+#### 9. Open your web browser and go to http://localhost:8000 to access the application.
 
-## 7. Attach the link to this PR as a solution.
+#### 10. If necessary, it is possible to register a new user using the following link:
+```python
+http://localhost:8000/api/user/register/
+```
+##### You can get information about the available tokens for the user at the following link:
+```python
+http://localhost:8000/api/user/token/
+```
+##### also, for correct operation, you need to install an extension for working with request and response headers, for example ModHeader.
+##### in expansion you need to enter "Authorization" in the name field, and "Bearer [your access tiken]" in the value field.
+
+#### After all previous steps py-airport-api-service will work correctly.
+## Test users were created to test the API
+admin:
+- email: admin@admin.com
+- pass: 1234admin
+user:
+- email: user@user.com
+- pass: 1234user
