@@ -1,10 +1,11 @@
+import json
+import os
+from concurrent.futures import ThreadPoolExecutor
+
+import django
 from django.core.management import call_command
 from django.db import migrations
 
-import os
-import django
-import json
-from concurrent.futures import ThreadPoolExecutor
 from route_service.models import Airport
 
 # Set the DJANGO_SETTINGS_MODULE environment variable to point to your Django settings
@@ -19,6 +20,7 @@ file_path = 'airports_data.json'
 # Read data from the JSON file
 with open(file_path, 'r') as json_file:
     data = json.load(json_file)
+
 
 # Function for importing data
 
@@ -43,6 +45,7 @@ def import_data(airport_data):
     )
 
     print(f"Airport {airport.name} saved to the database.")
+
 
 # Number of threads to use for parallel execution
 num_threads = 4

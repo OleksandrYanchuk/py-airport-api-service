@@ -30,7 +30,7 @@ class FlightViewSet(viewsets.ModelViewSet):
         .select_related("airplane")
         .annotate(
             tickets_available=(
-                F("airplane__rows") * F("airplane__seats_in_row") - Count("tickets")
+                    F("airplane__rows") * F("airplane__seats_in_row") - Count("tickets")
             )
         )
     )
@@ -63,7 +63,7 @@ class FlightViewSet(viewsets.ModelViewSet):
                 "date",
                 type=OpenApiTypes.DATE,
                 description=(
-                    "Filter by departure_time of Flight " "(ex. ?date=2023-07-19)"
+                        "Filter by departure_time of Flight " "(ex. ?date=2023-07-19)"
                 ),
             ),
         ]
