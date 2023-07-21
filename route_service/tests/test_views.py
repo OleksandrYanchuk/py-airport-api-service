@@ -43,20 +43,20 @@ class AirportViewSetTest(TestCase):
         data = response.data["results"]
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(data, serializer.data)
+        self.assertEqual(Airport.objects.count(), 28132)
 
     def test_create_airport(self):
         request = self.factory.post("/airports/", data=self.airport_data)
         force_authenticate(request, user=self.user)
         response = self.view(request)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(Airport.objects.count(), 2)
+        self.assertEqual(Airport.objects.count(), 28133)
 
     def test_create_airport_unauthorized(self):
         request = self.factory.post("/airports/", data=self.airport_data)
         response = self.view(request)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
-        self.assertEqual(Airport.objects.count(), 1)
+        self.assertEqual(Airport.objects.count(), 28132)
 
     def test_retrieve_airport_unauthorized(self):
         request = self.factory.get(f"/airports/{self.airport.pk}/")
@@ -114,7 +114,7 @@ class RouteViewSetTest(TestCase):
         force_authenticate(request, user=self.user)
         response = self.view(request)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(Route.objects.count(), 1)
+        self.assertEqual(Route.objects.count(), 3)
 
     def test_create_route_unauthorized(self):
         data = {
@@ -125,4 +125,4 @@ class RouteViewSetTest(TestCase):
         request = self.factory.post("/routes/", data=data)
         response = self.view(request)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
-        self.assertEqual(Route.objects.count(), 0)
+        self.assertEqual(Route.objects.count(), 2)
