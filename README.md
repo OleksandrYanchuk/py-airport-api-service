@@ -42,20 +42,13 @@ pip install -r requirements.txt
 ```python
 python manage.py migrate
 ```
-#### 7. Install all fixture with data:
-```python
-python airports.py
-```
-```python
-python manage.py loaddata data.json
-```
-#### 8.Run server:
+#### 7.Run server:
 ```python
 python manage.py runserver
 ```
-#### 9. Open your web browser and go to http://localhost:8000 to access the application.
+#### 8. Open your web browser and go to http://localhost:8000 to access the application.
 
-#### 10. If necessary, it is possible to register a new user using the following link:
+#### 9. If necessary, it is possible to register a new user using the following link:
 ```python
 http://localhost:8000/api/user/register/
 ```
