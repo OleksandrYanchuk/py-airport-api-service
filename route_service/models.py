@@ -12,8 +12,8 @@ class Airport(models.Model):
     state = models.TextField(blank=True, null=True)
     country = models.TextField(blank=True, null=True)
     elevation = models.IntegerField(blank=True, null=True)
-    lat = models.DecimalField(max_digits=20, decimal_places=15)
-    lon = models.DecimalField(max_digits=20, decimal_places=15)
+    lat = models.DecimalField(max_digits=20, decimal_places=15, blank=True, null=True)
+    lon = models.DecimalField(max_digits=20, decimal_places=15, blank=True, null=True)
     tz = models.TextField(blank=True, null=True)
     lid = models.TextField(blank=True, null=True)
 
