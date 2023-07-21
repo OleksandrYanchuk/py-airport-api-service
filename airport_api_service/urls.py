@@ -24,21 +24,21 @@ from drf_spectacular.views import (
 )
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("api/airplane/", include("airplane.urls", namespace="airplane")),
-    path("api/user/", include("user.urls", namespace="user")),
-    path("api/flight_service/", include("flight_service.urls", namespace="flight")),
-    path("api/route_service/", include("route_service.urls", namespace="route")),
-    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
-    path(
-        "api/doc/swagger/",
-        SpectacularSwaggerView.as_view(url_name="schema"),
-        name="swagger-ui",
-    ),
-    path(
-        "api/doc/redoc/",
-        SpectacularRedocView.as_view(url_name="schema"),
-        name="redoc",
-    ),
-    path("__debug__/", include("debug_toolbar.urls")),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                  path("admin/", admin.site.urls),
+                  path("api/airplane/", include("airplane.urls", namespace="airplane")),
+                  path("api/user/", include("user.urls", namespace="user")),
+                  path("api/flight_service/", include("flight_service.urls", namespace="flight")),
+                  path("api/route_service/", include("route_service.urls", namespace="route")),
+                  path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+                  path(
+                      "api/doc/swagger/",
+                      SpectacularSwaggerView.as_view(url_name="schema"),
+                      name="swagger-ui",
+                  ),
+                  path(
+                      "api/doc/redoc/",
+                      SpectacularRedocView.as_view(url_name="schema"),
+                      name="redoc",
+                  ),
+                  path("__debug__/", include("debug_toolbar.urls")),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
