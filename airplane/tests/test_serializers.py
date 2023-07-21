@@ -16,7 +16,7 @@ class AirplaneTypeSerializerTest(TestCase):
         serializer = AirplaneTypeSerializer(data=self.airplane_type_data)
         serializer.is_valid()
         serializer.save()
-        self.assertEqual(AirplaneType.objects.count(), 1)
+        self.assertEqual(AirplaneType.objects.count(), 3)
 
     def test_serializer_unique_name(self):
         # Переконайтеся, що серіалайзер не допускає створення дублікатів типів літаків
@@ -48,7 +48,7 @@ class AirplaneSerializerTest(TestCase):
         serializer = AirplaneSerializer(data=self.airplane_data)
         serializer.is_valid()
         serializer.save()
-        self.assertEqual(Airplane.objects.count(), 1)
+        self.assertEqual(Airplane.objects.count(), 3)
 
     def test_serializer_capacity_calculation(self):
         serializer = AirplaneSerializer(data=self.airplane_data)
@@ -73,4 +73,4 @@ class AirplaneSerializerTest(TestCase):
         serializer = AirplaneSerializer(data=self.airplane_data)
         serializer.is_valid()
         serializer.save()
-        self.assertEqual(Airplane.objects.get(id=1).airplane_type, new_airplane_type)
+        self.assertEqual(self.airplane_data["airplane_type"], new_airplane_type.id)

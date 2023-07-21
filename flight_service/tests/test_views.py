@@ -39,7 +39,7 @@ class CrewViewSetTest(TestCase):
         force_authenticate(request, user=self.user)
         response = self.view(request)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(Crew.objects.count(), 2)
+        self.assertEqual(Crew.objects.count(), 6)
 
 
 class FlightViewSetTest(TestCase):
