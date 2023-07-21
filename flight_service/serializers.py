@@ -28,10 +28,7 @@ class TicketSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         data = super(TicketSerializer, self).validate(attrs=attrs)
         Ticket.validate_ticket(
-            attrs["row"],
-            attrs["seat"],
-            data["flight"].airplane,
-            ValidationError
+            attrs["row"], attrs["seat"], data["flight"].airplane, ValidationError
         )
         return data
 

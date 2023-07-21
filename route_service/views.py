@@ -3,14 +3,13 @@ from rest_framework.pagination import PageNumberPagination
 
 from airplane.permissions import IsAdminOrIfAuthenticatedReadOnly
 from route_service.filters import AirportFilter
-
 from route_service.models import Airport, Route
 from route_service.serializers import AirportSerializer, RouteSerializer
 
 
 class AirportPagination(PageNumberPagination):
     page_size = 10
-    page_size_query_param = 'page_size'
+    page_size_query_param = "page_size"
     max_page_size = 1000
 
 

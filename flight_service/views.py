@@ -3,16 +3,19 @@ from datetime import datetime
 from django.db.models import F, Count
 from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import extend_schema, OpenApiParameter
-from rest_framework import viewsets, mixins, status
-from rest_framework.decorators import action
+from rest_framework import viewsets, mixins
 from rest_framework.pagination import PageNumberPagination
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import GenericViewSet
 
 from .models import Crew, Flight, Order
 from .permissions import IsAdminOrIfAuthenticatedReadOnly
-from .serializers import CrewSerializer, FlightSerializer, OrderSerializer, OrderListSerializer
+from .serializers import (
+    CrewSerializer,
+    FlightSerializer,
+    OrderSerializer,
+    OrderListSerializer,
+)
 
 
 class CrewViewSet(viewsets.ModelViewSet):
@@ -27,8 +30,7 @@ class FlightViewSet(viewsets.ModelViewSet):
         .select_related("airplane")
         .annotate(
             tickets_available=(
-                F("airplane__rows") * F("airplane__seats_in_row")
-                - Count("tickets")
+                F("airplane__rows") * F("airplane__seats_in_row") - Count("tickets")
             )
         )
     )
@@ -61,8 +63,7 @@ class FlightViewSet(viewsets.ModelViewSet):
                 "date",
                 type=OpenApiTypes.DATE,
                 description=(
-                        "Filter by departure_time of Flight "
-                        "(ex. ?date=2023-07-19)"
+                    "Filter by departure_time of Flight " "(ex. ?date=2023-07-19)"
                 ),
             ),
         ]

@@ -22,9 +22,15 @@ class Airport(models.Model):
 
 
 class Route(models.Model):
-    source = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="source_routes")
-    destination = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="destination_routes")
-    distance = models.DecimalField(max_digits=20, decimal_places=2, blank=True, null=True)
+    source = models.ForeignKey(
+        Airport, on_delete=models.CASCADE, related_name="source_routes"
+    )
+    destination = models.ForeignKey(
+        Airport, on_delete=models.CASCADE, related_name="destination_routes"
+    )
+    distance = models.DecimalField(
+        max_digits=20, decimal_places=2, blank=True, null=True
+    )
 
     def __str__(self):
         return f"{self.source.name} to {self.destination.name}"

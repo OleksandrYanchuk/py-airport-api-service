@@ -1,19 +1,4 @@
-from datetime import timedelta
-from django.utils import timezone
 from django.test import TestCase
-from rest_framework.exceptions import ValidationError
-from airplane.models import Airplane, AirplaneType
-from route_service.models import Route, Airport
-from flight_service.models import Crew, Flight, Ticket, Order
-from flight_service.serializers import (
-    CrewSerializer,
-    FlightSerializer,
-    TicketSerializer,
-    TicketListSerializer,
-    TicketSeatsSerializer,
-    OrderSerializer,
-    OrderListSerializer,
-)
 
 
 class CrewSerializerTest(TestCase):
@@ -31,18 +16,12 @@ class CrewSerializerTest(TestCase):
 from datetime import timedelta
 from django.utils import timezone
 from django.test import TestCase
-from rest_framework.exceptions import ValidationError
 from airplane.models import Airplane, AirplaneType
 from route_service.models import Route, Airport
-from flight_service.models import Crew, Flight, Ticket, Order
+from flight_service.models import Crew, Flight
 from flight_service.serializers import (
     CrewSerializer,
-    FlightSerializer,
     TicketSerializer,
-    TicketListSerializer,
-    TicketSeatsSerializer,
-    OrderSerializer,
-    OrderListSerializer,
 )
 
 
@@ -50,7 +29,10 @@ class TicketSerializerTest(TestCase):
     def setUp(self):
         self.airplane_type = AirplaneType.objects.create(name="Test Airplane Type")
         self.airplane = Airplane.objects.create(
-            name="Test Airplane", rows=5, seats_in_row=4, airplane_type=self.airplane_type
+            name="Test Airplane",
+            rows=5,
+            seats_in_row=4,
+            airplane_type=self.airplane_type,
         )
         self.source_airport = Airport.objects.create(
             icao="KJFK",
