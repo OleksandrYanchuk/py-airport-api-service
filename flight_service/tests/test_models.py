@@ -1,14 +1,13 @@
-import time
-
 from _decimal import Decimal
 from django.contrib.auth import get_user_model
-
-from django.test import TestCase
 from django.core.exceptions import ValidationError
+from django.test import TestCase
 from django.utils import timezone
+
 from airplane.models import Airplane, AirplaneType
-from route_service.models import Route, Airport
 from flight_service.models import Crew, Flight, Order, Ticket
+from route_service.models import Route, Airport
+
 
 class CrewModelTest(TestCase):
     def test_crew_str_representation(self):
@@ -18,7 +17,9 @@ class CrewModelTest(TestCase):
 
 class OrderModelTest(TestCase):
     def setUp(self):
-        self.user = get_user_model().objects.create_user("admin@user.com", "password", is_staff=True)
+        self.user = get_user_model().objects.create_user(
+            "admin@user.com", "password", is_staff=True
+        )
         self.order = Order.objects.create(user=self.user)
 
     def test_order_str_representation(self):
@@ -27,35 +28,41 @@ class OrderModelTest(TestCase):
 
 class TicketModelTest(TestCase):
     def setUp(self):
-        self.user = get_user_model().objects.create_user("admin@user.com", "password", is_staff=True)
+        self.user = get_user_model().objects.create_user(
+            "admin@user.com", "password", is_staff=True
+        )
         self.airplane_type = AirplaneType.objects.create(name="Test Airplane Type")
-        self.airplane = Airplane.objects.create(name="Test Airplane", rows=5, seats_in_row=4,
-                                                airplane_type=self.airplane_type)
+        self.airplane = Airplane.objects.create(
+            name="Test Airplane",
+            rows=5,
+            seats_in_row=4,
+            airplane_type=self.airplane_type,
+        )
         self.source_airport = Airport.objects.create(
-            icao='KJFK',
-            iata='JFK',
-            name='John F. Kennedy International Airport',
-            city='New York',
-            state='NY',
-            country='USA',
+            icao="KJFK",
+            iata="JFK",
+            name="John F. Kennedy International Airport",
+            city="New York",
+            state="NY",
+            country="USA",
             elevation=13,
-            lat=Decimal('40.6413'),
-            lon=Decimal('-73.7781'),
-            tz='America/New_York',
-            lid='US'
+            lat=Decimal("40.6413"),
+            lon=Decimal("-73.7781"),
+            tz="America/New_York",
+            lid="US",
         )
         self.dest_airport = Airport.objects.create(
-            icao='EGLL',
-            iata='LHR',
-            name='Heathrow Airport',
-            city='London',
-            state='England',
-            country='UK',
+            icao="EGLL",
+            iata="LHR",
+            name="Heathrow Airport",
+            city="London",
+            state="England",
+            country="UK",
             elevation=25,
-            lat=Decimal('51.4700'),
-            lon=Decimal('-0.4543'),
-            tz='Europe/London',
-            lid='GB'
+            lat=Decimal("51.4700"),
+            lon=Decimal("-0.4543"),
+            tz="Europe/London",
+            lid="GB",
         )
         self.route = Route.objects.create(
             source=self.source_airport,

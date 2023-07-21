@@ -1,19 +1,22 @@
+from django.contrib.auth import get_user_model
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase, APIRequestFactory, force_authenticate
-from django.contrib.auth import get_user_model
-from airplane.models import AirplaneType, Airplane
+
+from airplane.models import AirplaneType
 from airplane.views import AirplaneTypeViewSet, AirplaneViewSet
-from airplane.permissions import IsAdminOrIfAuthenticatedReadOnly
-from airplane.serializers import AirplaneTypeSerializer, AirplaneSerializer
 
 
 class AirplaneTypeViewSetTest(APITestCase):
     def setUp(self):
         self.factory = APIRequestFactory()
-        self.view = AirplaneTypeViewSet.as_view({'get': 'list', 'post': 'create'})  # Додано дозвіл POST-запитів
-        self.uri = reverse('airplane:airplanetype-list')  # Виправлено reverse
-        self.admin_user = get_user_model().objects.create_user("admin@user.com", "password", is_staff=True)
+        self.view = AirplaneTypeViewSet.as_view(
+            {"get": "list", "post": "create"}
+        )  # Додано дозвіл POST-запитів
+        self.uri = reverse("airplane:airplanetype-list")  # Виправлено reverse
+        self.admin_user = get_user_model().objects.create_user(
+            "admin@user.com", "password", is_staff=True
+        )
 
         self.airplane_type_data = {"name": "Boeing 747"}
 
@@ -41,16 +44,20 @@ class AirplaneTypeViewSetTest(APITestCase):
 class AirplaneViewSetTest(APITestCase):
     def setUp(self):
         self.factory = APIRequestFactory()
-        self.view = AirplaneViewSet.as_view({'get': 'list', 'post': 'create'})  # Додано дозвіл POST-запитів
-        self.uri = reverse('airplane:airplane-list')  # Виправлено reverse
-        self.admin_user = get_user_model().objects.create_user("admin@user.com", "password", is_staff=True)
-        self.airplane_type = AirplaneType.objects.create(name='Boeing 747')
+        self.view = AirplaneViewSet.as_view(
+            {"get": "list", "post": "create"}
+        )  # Додано дозвіл POST-запитів
+        self.uri = reverse("airplane:airplane-list")  # Виправлено reverse
+        self.admin_user = get_user_model().objects.create_user(
+            "admin@user.com", "password", is_staff=True
+        )
+        self.airplane_type = AirplaneType.objects.create(name="Boeing 747")
 
         self.airplane_data = {
             "name": "Airplane1",
             "rows": 10,
             "seats_in_row": 6,
-            "airplane_type": self.airplane_type.id
+            "airplane_type": self.airplane_type.id,
         }
 
     def test_list_airplanes(self):
