@@ -63,14 +63,11 @@ http://localhost:8000/api/user/register/
 ```python
 http://localhost:8000/api/user/token/
 ```
-##### also, for correct operation, you need to install an extension for working with request and response headers, for example ModHeader.
-##### in expansion you need to enter "Authorization" in the name field, and "Bearer [your access tiken]" in the value field.
-
-#### After all previous steps py-airport-api-service will work correctly.
 ## Test users were created to test the API
 admin:
 - email: admin@admin.com
 - pass: 1234admin
+
 user:
 - email: user@user.com
 - pass: 1234user
